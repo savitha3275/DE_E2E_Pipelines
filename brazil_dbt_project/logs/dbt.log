@@ -1,0 +1,32 @@
+[0m15:37:39.264876 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203AEF1CAD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203B12479D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203B1247ED0>]}
+
+
+============================== 15:37:39.301028 | ea4e7bee-f052-47d7-a2d8-1780f5fe0964 ==============================
+[0m15:37:39.301028 [info ] [MainThread]: Running with dbt=1.11.7
+[0m15:37:39.305556 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\Savithadevi\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt init brazil_ecommerce', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m15:37:39.683087 [debug] [MainThread]: Starter project path: C:\Users\Savithadevi\Documents\Ironhack\DE\Everyday syllabus\Week5_Day5\Brazilian-Ecomm_E2E_Pipeline_aws_snowflake_dbt\brazil_dbt_project\venv\Lib\site-packages\dbt\include\starter_project
+[0m15:37:39.967985 [info ] [MainThread]: 
+Your new dbt project "brazil_ecommerce" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m15:37:39.969901 [info ] [MainThread]: Setting up your profile.
+[0m15:39:19.246800 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m15:39:19.768926 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m15:39:19.769774 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m15:43:55.787187 [info ] [MainThread]: Profile brazil_ecommerce written to C:\Users\Savithadevi\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m15:43:55.908783 [debug] [MainThread]: Command `dbt init` succeeded at 15:43:55.904157 after 377.24 seconds
+[0m15:43:55.926192 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203B22FE3F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203B1278830>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000203B2320AF0>]}
+[0m15:43:55.934907 [debug] [MainThread]: Flushing usage events
+[0m15:43:57.343957 [debug] [MainThread]: An error was encountered while trying to flush usage events
