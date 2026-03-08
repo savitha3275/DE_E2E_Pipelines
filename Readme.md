@@ -113,6 +113,63 @@ sources:
 
 Since your staging views are already in the RAW schema, the next step is to build the transformation layers in DEV and demonstrate dbt features (materializations, seeds, snapshots, ephemeral).
 
+SEED implementation: Seeds are small static datasets stored as CSV files in dbt. They are commonly used for lookup tables like category translations and then joined to build dimension or fact models.
+
+dbt will create a table named:
+
+SEED_product_category_translation
+
+inside your warehouse schema.
+
+You can reference it in models using:
+
+{{ ref('SEED_product_category_translation') }}
+
+STEP1:
+
+Create:
+
+models/dim_product_category.sql
+SELECT
+product_category_name AS category_name_pt,
+product_category_name_english AS category_name_en
+FROM {{ ref('product_category_name_translation') }}
+
+Why this dimension exists:
+analysts want English category names
+dashboards become readable
+
+
+STEP 2 :
+Fact table joining the seed
+
+Now join it with products.
+
+Create:
+
+models/fct_products.sql
+
+SELECT
+p.product_id,
+p.product_category_name,
+c.product_category_name_english AS category_name_en
+FROM {{ ref('stg_products') }} p
+LEFT JOIN {{ ref('product_category_name_translation') }} c
+ON p.product_category_name = c.product_category_name
+
+
+Action	            Command
+Load CSV	        dbt seed
+Build models	    dbt run
+Check results	    SQL in Snowflake
+
+to verify seed worked :
+SELECT
+product_id,
+product_category_name,
+category_name_en
+FROM BRAZIL_ECOMMERCE.raw_dev.fct_products
+LIMIT 20;
 
 - Implement dbt models for data cleansing and transformation
 - Create dimensional models for analytics
