@@ -173,5 +173,10 @@ LIMIT 20;
 
 - Implement dbt models for data cleansing and transformation
 - Create dimensional models for analytics
+
+Since our staging views are already in the RAW schema, the next step is to build the transformation layers in DEV and demonstrate dbt features (materializations, seeds, snapshots, ephemeral).
+
+
+
 - Set up automated pipeline orchestration (e.g., Airflow)
 - Implement data quality checks and monitoring
