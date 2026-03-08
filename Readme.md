@@ -171,12 +171,31 @@ category_name_en
 FROM BRAZIL_ECOMMERCE.raw_dev.fct_products
 LIMIT 20;
 
-- Implement dbt models for data cleansing and transformation
-- Create dimensional models for analytics
+Ephemeral implementation- will not have any table or view created but uses CTEs.
+{{ config(materialized='ephemeral') }}
 
-Since our staging views are already in the RAW schema, the next step is to build the transformation layers in DEV and demonstrate dbt features (materializations, seeds, snapshots, ephemeral).
+Example : intermediate model.
 
+Snapshot implementation using SCD-2:
 
+/*
+Snapshot model for reviews.
+This snapshot captures changes in review scores and comments over time.
+*/
+{% snapshot snap_reviews %}
 
-- Set up automated pipeline orchestration (e.g., Airflow)
-- Implement data quality checks and monitoring
+{{
+config(
+target_schema='RAW_SNAPSHOTS',
+unique_key='review_id',
+strategy='check',
+check_cols=['review_score','review_comment_message']
+)
+}}
+
+SELECT *
+FROM {{ ref('src_reviews') }}
+
+{% endsnapshot %}
+
+In snapshot, old version will be closed with dbt_valid_to date and a new version created with 'null' in dbt_valid_to column
