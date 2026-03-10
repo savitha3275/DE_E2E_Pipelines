@@ -111,7 +111,31 @@ sources:
 
 ## Next Steps
 
-Since your staging views are already in the RAW schema, the next step is to build the transformation layers in DEV and demonstrate dbt features (materializations, seeds, snapshots, ephemeral).
+Rule used to classify tables:
+Simple rule used in analytics modeling.
+
+If the table answers:
+"Who / What / Where?"
+➡ Dimension
+
+Example:
+
+customer
+product
+seller
+location
+If the table answers:
+
+"How many / How much / When?"
+➡ Fact
+Example:
+
+orders
+payments
+revenue
+reviews
+
+Since our staging views are already in the RAW schema, the next step is to build the transformation layers in DEV and demonstrate dbt features (materializations, seeds, snapshots, ephemeral).
 
 SEED implementation: Seeds are small static datasets stored as CSV files in dbt. They are commonly used for lookup tables like category translations and then joined to build dimension or fact models.
 
