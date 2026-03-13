@@ -1,24 +1,23 @@
-{{ 
-    config(
-        materialized='view'  
-    ) 
-}}
--- staging views for inventory
--- Source table: raw_inventory (RAW schema)
-SELECT
-    timestamp AS inventory_time,
-    order_events,
-    units_ordered,
-    units_delivered,
-    units_cancelled,
-    fulfillment_rate,
-    top_warehouse,
-    top_product,
-    top_category,
-    orders_placed,
-    orders_delivered,
-    orders_cancelled
-FROM {{ source('raw', 'raw_inventory') }}
+-- models/staging/stg_fraud.sql
+WITH dedup AS (
+    SELECT *
+    FROM (
+        SELECT *,
+               ROW_NUMBER() OVER (
+                   PARTITION BY ALERT_ID  -- your unique key for fct_fraud
+                   ORDER BY TIMESTAMP DESC  -- latest record first
+               ) AS rn
+        FROM {{ source('raw', 'raw_fraud') }}
+    )
+    WHERE rn = 1
+)
 
--- Filters out rows with zero order_events.
--- Standardizes numeric types for proper aggregation in marts.
+SELECT
+    ALERT_ID,
+    USER_ID,
+    PAYMENT_ID,
+    STATUS,
+    AMOUNT,
+    TIMESTAMP,
+    ALERT_TYPE
+FROM dedup
