@@ -2,6 +2,15 @@
 
 Kafka → Snowflake → dbt Analytics Platform
 
+
+Streaming ingestion (Kafka)
+Warehouse storage (Snowflake)
+Transformation (dbt)
+Data modeling (star schema)
+History tracking (snapshots)
+Data quality (tests)
+Documentation (dbt docs)
+
 ## Project Overview
 
 This project demonstrates a **modern end-to-end real-time data pipeline** built for an e-commerce platform (FluxCart).
