@@ -320,9 +320,27 @@ FROM FCT_FRAUD
 GROUP BY SEVERITY
 ORDER BY alert_count DESC;
 
+-- Top 5 users with highest total fraud amount
+
+SELECT 
+    USER_ID, 
+    SUM(AMOUNT) AS total_fraud
+FROM FCT_FRAUD
+GROUP BY USER_ID
+ORDER BY total_fraud DESC
+LIMIT 5;
+
+-- Top 5 products causing order cancellations
+SELECT 
+    TOP_PRODUCT, 
+    SUM(ORDERS_CANCELLED) AS total_cancelled
+FROM FCT_INVENTORY
+GROUP BY TOP_PRODUCT
+ORDER BY total_cancelled DESC
+LIMIT 5;
 ---
 
-## Key Concepts Demonstrated
+**## Key Concepts Demonstrated**
 
 * Real-time streaming pipelines
 * Event-driven data ingestion
