@@ -1,20 +1,23 @@
-{{ config(
-    materialized='view'
-) }}
+-- models/staging/stg_fraud.sql
+WITH dedup AS (
+    SELECT *
+    FROM (
+        SELECT *,
+               ROW_NUMBER() OVER (
+                   PARTITION BY ALERT_ID  -- your unique key for fct_fraud
+                   ORDER BY TIMESTAMP DESC  -- latest record first
+               ) AS rn
+        FROM {{ source('raw', 'raw_fraud') }}
+    )
+    WHERE rn = 1
+)
 
--- staging views for fraud data
--- Source table: raw_fraud_alerts (RAW schema)
 SELECT
-    timestamp AS alert_time,           
-    alert_id,
-    rule,
-    severity,
-    user_id,
-    payment_id,
-    order_id,
-    amount,
-    detail
-FROM {{ source('raw', 'raw_fraud') }}
-
---Only keeps rows with valid alert_id.
---Converts amount to float.
+    ALERT_ID,
+    USER_ID,
+    PAYMENT_ID,
+    STATUS,
+    AMOUNT,
+    TIMESTAMP,
+    ALERT_TYPE
+FROM dedup
