@@ -1,0 +1,56 @@
+version: 2
+
+models:
+
+  - name: fct_analytics
+    description: Fact table containing aggregated analytics events from FluxCart Kafka stream.
+    columns:
+      - name: EVENT_TIME
+        description: Timestamp when the analytics aggregation window was generated
+        tests:
+          - not_null
+
+  - name: fct_fraud
+    description: Fraud alert fact table generated from Kafka fraud detection stream.
+    columns:
+      - name: ALERT_ID
+        description: Unique identifier for each fraud alert
+        tests:
+          - not_null   
+
+      - name: USER_ID
+        description: User associated with the fraud alert
+        tests:
+          - not_null
+
+  - name: fct_inventory
+    description: Inventory activity aggregated from the Kafka pipeline.
+    columns:
+      - name: INVENTORY_TIME
+        tests:
+          - not_null
+
+
+  - name: dim_users
+    description: Dimension table containing unique users from fraud events.
+    columns:
+      - name: USER_ID
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_products
+    description: Dimension table containing unique products and categories.
+    columns:
+      - name: TOP_PRODUCT
+        tests:
+          - not_null
+
+
+  - name: dim_warehouses
+    description: Dimension table containing warehouse information.
+    columns:
+      - name: TOP_WAREHOUSE
+        tests:
+          - not_null

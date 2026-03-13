@@ -1,0 +1,13 @@
+fluxcart_dbt:
+  outputs:
+    dev:
+      account: PWJKGQP-AX00621
+      database: FLUXCART
+      password: dbtPassword123
+      role: transform
+      schema: DEV
+      threads: 4
+      type: snowflake
+      user: dbt
+      warehouse: COMPUTE_WH_FLUX
+  target: dev

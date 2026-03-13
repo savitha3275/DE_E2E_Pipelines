@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: FLUXCART
+    schema: RAW
+
+    tables:
+      - name: raw_analytics
+      - name: raw_fraud
+      - name: raw_inventory
