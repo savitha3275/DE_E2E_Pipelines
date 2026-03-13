@@ -1,5 +1,10 @@
 
-# Kafka pipline 
+# Kafka pipeline 
+
+Requirements:
+Kafka cluster running (Docker Compose)
+Python 3.9+
+Packages: confluent-kafka, pandas, streamlit
 
 **error : no module found**
 
@@ -117,6 +122,7 @@ python export.py (in terminal 3. go inside bi_integration folder and run this)
 
 then finally, run
 streamlit run streamlit_pipeline.py
+
 
 
 
