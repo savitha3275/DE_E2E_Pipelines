@@ -296,22 +296,29 @@ dbt docs serve
 
 ## Example Analytics Queries
 
-Top performing products:
-
-```sql
-SELECT TOP_PRODUCT, COUNT(*) AS purchases
+-- analytical queries
+-- Top 5 products by revenue
+SELECT TOP_PRODUCT, SUM(TOTAL_REVENUE) AS revenue
 FROM FCT_ANALYTICS
 GROUP BY TOP_PRODUCT
-ORDER BY purchases DESC;
-```
+ORDER BY revenue DESC;
 
-Fraud alerts by user:
+--Warehouse fulfillment rate (handle division by zero)
+SELECT 
+    TOP_WAREHOUSE, 
+    SUM(ORDERS_DELIVERED) / NULLIF(SUM(ORDERS_PLACED),0) * 100 AS fulfillment_rate
+FROM FCT_INVENTORY
+GROUP BY TOP_WAREHOUSE
+ORDER BY fulfillment_rate DESC;
 
-```sql
-SELECT USER_ID, COUNT(*) AS fraud_alerts
+-- Fraud alerts summary by severity
+
+SELECT 
+    SEVERITY, 
+    COUNT(*) AS alert_count
 FROM FCT_FRAUD
-GROUP BY USER_ID;
-```
+GROUP BY SEVERITY
+ORDER BY alert_count DESC;
 
 ---
 
